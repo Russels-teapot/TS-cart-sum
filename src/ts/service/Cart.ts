@@ -12,11 +12,10 @@ export default class Cart {
     }
 
     calculateSum():number {
-      let sum = 0
-      for(const item of this._items) {
-        sum += item.price
-      }
-      return sum
+      const result = this._items.reduce(function(sum, current) {
+      return sum + current.price;
+      }, 0);
+      return result
     }
 
     calculateDiscountSum(discount:number):number {
@@ -26,7 +25,6 @@ export default class Cart {
     }
 
     deleteItem(id:number):void {
-      const indexToDelete = this._items.findIndex(item => item.id === id);
-      this._items.splice(indexToDelete, 1)
+      this._items = this._items.filter((item:Buyable) => item.id !== id)
     }
 }
